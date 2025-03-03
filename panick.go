@@ -23,16 +23,20 @@ func Maybe(probability uint64, message string) {
 	}
 }
 
-func Error(err error) {
+func OnError(err error) {
 	panic(err)
 }
 
-// Func returns a function that panics after calling f.
-func Func(f func()) func() {
-	return func() {
-		f()
-		panic("panick: Func")
-	}
+// Room creates a Panick Room and executes a function in a safe environment where
+// panics are contained and returns the result or an error if a panic occurred
+func Room(f func()) (err error) {
+	defer func() {
+		if r := recover(); r != nil {
+			err = fmt.Errorf("Panick Room: %v", r)
+		}
+	}()
+	f()
+	return err
 }
 
 // RandomDelay chooses a random duration up to max and sleeps for that duration in
