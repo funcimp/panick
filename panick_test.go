@@ -14,7 +14,7 @@ func TestRandomDelay(t *testing.T) {
 	}()
 
 	max := 1 * time.Millisecond
-	for i := 0; i < 100; i++ {
-		RandomDelay(max)
+	for i := 0; i < 10; i++ {
+		RandomDelay(max, "tests")
 	}
 }

@@ -14,8 +14,8 @@ func If(condition bool, message string) {
 	}
 }
 
-// Maybe panics if the probability is greater than the random number generated between 0 and 100
-func Maybe(probability uint64, message string) {
+// Sometimes panics if the probability is greater than the random number generated between 0 and 100
+func Sometimes(probability uint64, message string) {
 	n, _ := rand.Int(rand.Reader, big.NewInt(100))
 	rnd := n.Uint64()
 	if rnd < probability {
@@ -52,5 +52,3 @@ func Delay(d time.Duration, v ...any) {
 	time.Sleep(d)
 	panic(fmt.Sprintln(v...))
 }
-
-func PanicWithMessage()
